@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- For button images -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">iCar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/cars">Cars <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="/owners">Owners <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <span class="navbar-text">
+      iCar is the best place to buy
+    </span>
+    </div>
+</nav>
+
+<h1>EDIT AN OWNER</h1>
+<div class="jumbotron">
+
+    <form  th:action="@{'/owners/edit/' + ${index}}" th:object="${editOwner}" method="POST">
+        <div class="form-group">
+            <label for="firstName">First name</label>
+            <input class="form-control" th:placeholder="First-Name"
+                   id="firstName" aria-describedby="firstName" type="text" th:field="*{firstName}"/>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last name</label>
+            <input type="text" class="form-control" th:placeholder="Last-Name"
+                   id="lastName" aria-describedby="lastName" th:field="*{lastName}" />
+        </div>
+        <div class="form-group">
+            <label for="phoneNo">Phone number</label>
+            <input type="text" class="form-control" th:placeholder="Phone-Number" maxlength="15"
+                   id="phoneNo" aria-describedby="phoneNo" th:field="*{phoneNo}" />
+        </div>
+        <input class="btn btn-info" type="submit" value="Save" /> <input class="btn btn-danger" type="reset" value="Reset"/>
+    </form>
+
+</div>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

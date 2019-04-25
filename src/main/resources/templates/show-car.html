@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Car view</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- For button images -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">iCar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="/cars">Cars <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/owners">Owners <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <span class="navbar-text">
+      iCar is the best place to buy
+    </span>
+    </div>
+</nav>
+
+<!--<div th:insert="fragments/navbar :: navbar">  </div>-->
+<!--<div th:fragment="navbar" th:remove="tag">-->
+    <!--<p>This is the navbar fragment</p>-->
+<!--</div>-->
+
+
+<div class="jumbotron">
+        <!--ADDING A CAR-->
+        <form  th:action="@{/savecar}" th:object="${newCar}" method="POST">
+            <div class="form-group">
+                <label for="regNumber">Reg number</label>
+                <input class="form-control" th:placeholder="Registration" maxlength="7"
+                       id="regNumber" aria-describedby="regNumber" type="text" th:field="*{reg}"/>
+            </div>
+            <div class="form-group">
+                <label for="brandName">Brand</label>
+                <input type="text" class="form-control" th:placeholder="Brand"
+                       id="brandName" aria-describedby="brandName" th:field="*{brand}" />
+            </div>
+            <div class="form-group">
+                <label for="color">Colour</label>
+                <input type="text" class="form-control" th:placeholder="Colour"
+                       id="color" aria-describedby="color" th:field="*{color}" />
+            </div>
+            <div class="form-group">
+                <label for="maxSpeed">Max Speed</label>
+                <input type="number" class="form-control" th:placeholder="MaxSpeed"
+                       id="maxSpeed" aria-describedby="maxSpeed" th:field="*{maxSpeed}"/>
+            </div>
+            <input class="btn btn-info" type="submit" value="Submit" /> <input class="btn btn-danger" type="reset" value="Reset"/>
+        </form>
+
+</div>
+
+<!-- Jacob's solution -->
+<table class="table table-striped">
+    <thead>
+    <th class="col">Registration</th>
+    <th class="col">Brand</th>
+    <th class="col">Colour</th>
+    <th class="col">MaxSpeed</th>
+    <th class="col">Edit Car</th>
+    <th class="col">Delete Car</th>
+    </thead>
+    <tr th:each="car,iter : ${cars}">
+        <td th:text="${car.reg}"></td>
+        <td th:text="${car.brand}"></td>
+        <td th:text="${car.color}"></td>
+        <td th:text="${car.maxSpeed}"></td>
+        <td><a th:href="@{'/cars/edit/' + ${iter.index}}" class="btn btn-info fas fa-pen"></a></td>
+        <td><a th:href="@{'/cars/delete/' + ${iter.index}}" class="btn btn-danger fas fa-trash"></a></td>
+    </tr>
+</table>
+
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>
